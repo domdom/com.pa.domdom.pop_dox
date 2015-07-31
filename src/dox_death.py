@@ -1,0 +1,287 @@
+import loader
+import utils
+
+base = loader.loads("""{
+	"emitters" : [
+		{
+			"spec": {
+				"shader": "meshParticle_unit",
+				"shape": "mesh",
+				"facing": "velocity",
+				"red" : 1,
+				"size" : [[0.9, 1], [1, 0]],
+				"papa": "/mod/dox/dox_top.papa",
+				"polyAdjustCenter" : 5,
+				"materialProperties": {
+					"DiffuseTexture": "/pa/units/land/assault_bot/assault_bot_diffuse.papa",
+					"MaterialTexture": "/pa/units/land/assault_bot/assault_bot_material.papa",
+					"MaskTexture": "/pa/units/land/assault_bot/assault_bot_mask.papa",
+					"TeamColor_Primary": 1,
+					"TeamColor_Secondary": 2
+				}
+			},
+			"velocityZ": 1,
+			"velocityRangeX" : 0.45,
+			"velocityRangeY" : 0.45,
+			"velocity": 90,
+			"velocityRange" : 6,
+			"gravity" : -32,
+			"drag": [[0, 0.9], [0.4, 1]],
+			"lifetime": 1.1,
+			"emissionBursts": 1,
+			"bLoop": false,
+			"rotationRateRange" : 10,
+			"endDistance": -1
+		},
+		{
+			"spec": {
+				"shader": "meshParticle_unit",
+				"shape": "mesh",
+				"facing": "EmitterZ",
+				"papa": "/mod/dox/dox_bot.papa",
+				"materialProperties": {
+					"DiffuseTexture": "/pa/units/land/assault_bot/assault_bot_diffuse.papa",
+					"MaterialTexture": "/pa/units/land/assault_bot/assault_bot_material.papa",
+					"MaskTexture": "/pa/units/land/assault_bot/assault_bot_mask.papa",
+					"TeamColor_Primary": 1,
+					"TeamColor_Secondary": 2
+				}
+			},
+			"gravity": [[0, 0], [1, 0], [2, -20]],
+			"lifetime": 2,
+			"emissionBursts": 1,
+			"bLoop": false,
+			"endDistance": -1
+		}
+	]
+}""")
+
+rings = loader.loads("""
+[
+    {
+      "spec": {
+        "shader": "particle_add",
+        "facing": "EmitterZ",
+        "size": {"keys": [[0, 0 ], [0.2, 0.667 ], [0.4, 0.889 ], [0.6, 0.963 ], [0.8, 0.98 ], [1, 1 ] ], "stepped": false },
+        "red": 1,
+        "green": 0.9,
+        "blue": 0.2,
+        "alpha": {"keys": [[0, 1 ], [0.3, 0.2 ], [0.6, 0.05 ], [1, 0 ] ], "stepped": false },
+        "baseTexture": "/pa/effects/textures/particles/simpleExplosionRing.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/no_ramp.papa",
+        "dataChannelFormat": "PositionAndColor"
+      },
+      "sizeX": 10,
+      "offsetZ": 2,
+      "emissionBursts": 1,
+      "rotationRange": 0.5,
+      "lifetime": 1,
+      "emitterLifetime": 2,
+      "bLoop": false,
+      "sort": "NoSort"
+    },
+    {
+      "spec": {
+        "shader": "particle_add",
+        "facing": "EmitterZ",
+        "size": {"keys": [[0, 0 ], [1, 1 ] ], "stepped": false },
+        "red": 1.0,
+        "green": 0.8,
+        "blue": 0.1,
+        "alpha": {"keys": [[0, 0.25 ], [0.3, 0.05 ], [0.6, 0.02 ], [1, 0 ] ], "stepped": false },
+        "baseTexture": "/pa/effects/textures/particles/simpleExplosionRing.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/no_ramp.papa",
+        "dataChannelFormat": "PositionAndColor"
+      },
+      "sizeX": 30,
+      "offsetZ": 2,
+      "emissionBursts": 1,
+      "rotationRange": 0.5,
+      "lifetime": 0.8,
+      "emitterLifetime": 2,
+      "bLoop": false,
+      "sort": "NoSort"
+    }
+]""")
+
+linked_explosion_trail = loader.loads("""{
+      "spec": {
+        "shader": "particle_add_ramp",
+        "size": [[0, 1.5 ], [1, 0.25 ]],
+        "alpha": [[0.5, 1 ], [1, 0 ] ],
+        "baseTexture": "/pa/effects/textures/particles/simpleSmoke.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/simpleSmokeTrail_ramp.papa",
+        "dataChannelFormat": "PositionAndColor"
+      },
+      "sizeX" : [[0, 1.9], [0.5, 1]],
+      "rotationRange" : 3.1415,
+      "type": "EMITTER",
+      "linkIndex" : 0,
+      "offsetZ": 0.25,
+      "emissionRate": 180,
+      "velocityZ": -0.1,
+      "velocity": 10,
+      "velocityRange": 7,
+      "drag": 0.99,
+      "rampV": 0.125,
+      "lifetime": 0.25,
+      "emitterLifetime": 0.7,
+      "bLoop": false,
+      "sort": "NoSort"
+    }
+ """)
+
+debris = loader.loads("""
+    {
+      "spec": {
+        "shader": "particle_transparent",
+        "size": {"keys": [[0, 1 ], [0.5, 0.7 ], [1, 0 ] ] },
+        "red": 0.1,
+        "green": 0.1,
+        "blue": 0.1,
+        "baseTexture": "/pa/effects/textures/particles/debrisChunks.papa",
+        "flipBookColumns": 3,
+        "flipBookRows": 3,
+        "flipBookRandomStart": true,
+        "dataChannelFormat": "PositionColorAndFlipbook"
+      },
+      "type": "SPHEROID",
+      "offsetRangeX": 3,
+      "offsetRangeY": 3,
+      "offsetRangeZ": 1.25,
+      "offsetAllowNegZ": false,
+      "velocity": 25,
+      "velocityRange": 10,
+      "useRadialVelocityDir": true,
+      "gravity": -9.8,
+      "drag": 0.99,
+      "sizeX": 1.0,
+      "sizeRangeX": 0.25,
+      "emissionBursts": 17,
+      "rotationRange": 3.2,
+      "rotationRateRange": 20,
+      "lifetime": 1.5,
+      "lifetimeRange": 0.5,
+      "emitterLifetime": 0.1,
+      "bLoop": false
+    }""")
+
+point_light = loader.loads("""
+    {
+      "spec": {
+        "shape": "pointlight",
+        "red": 1,
+        "green": 0.2,
+        "blue": 0,
+        "alpha": {"keys": [[0, 10 ], [0.25, 3 ], [1, 0 ] ], "stepped": false }
+      },
+      "offsetZ": 2,
+      "sizeX": 35,
+      "emissionBursts": 1,
+      "lifetime": 0.8,
+      "emitterLifetime": 0.5,
+      "bLoop": false
+    }""")
+
+stuff = loader.loads("""[
+    {
+      "spec": {
+        "shader": "particle_add_ramp",
+        "alpha": {"keys": [[0, 1 ], [1, 0 ] ], "stepped": false },
+        "cameraPush": 1,
+        "baseTexture": "/pa/effects/textures/particles/softdot.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/simpleSmokeCenter_ramp.papa",
+        "dataChannelFormat": "PositionAndColor"
+      },
+      "offsetZ": 3,
+      "sizeX": 25,
+      "maxParticles": 1,
+      "lifetime": 1,
+      "emitterLifetime": 0.1,
+      "bLoop": false,
+      "sort": "NoSort"
+    },
+        {
+      "spec": {
+        "shader": "particle_add",
+        "facing": "Velocity",
+        "size": {"keys": [[0, 0 ], [0.2, 1 ], [1, 0 ] ], "stepped": false },
+        "red": 1,
+        "green": 0.1,
+        "blue": 0,
+        "alpha": {"keys": [[0, 1 ], [1, 0 ] ], "stepped": false },
+        "baseTexture": "/pa/effects/textures/particles/dot.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/no_ramp.papa",
+        "dataChannelFormat": "PositionColorAndAlignVector"
+      },
+      "type": "SHELL",
+      "offsetRangeX": 3,
+      "offsetRangeY": 3,
+      "offsetRangeZ": 2,
+      "offsetAllowNegZ": false,
+      "velocityZ": 0.1,
+      "velocity": 25,
+      "velocityRange": 5,
+      "useRadialVelocityDir": true,
+      "temp_gravity": -9.8,
+      "drag": 0.95,
+      "sizeX": 0.25,
+      "sizeY": 5,
+      "sizeRangeY": 4,
+      "emissionBursts": 25,
+      "lifetime": 0.6,
+      "lifetimeRange": 0.15,
+      "emitterLifetime": 2,
+      "bLoop": false,
+      "sort": "NoSort"
+    },
+    {
+      "spec": {
+        "shader": "particle_transparent_ramp",
+        "size": {"keys": [[0, 0 ], [0.05, 1 ], [0.25, 1.2 ], [1, 0 ] ], "stepped": false },
+        "red": {"keys": [[0, 3 ], [0.75, 1 ] ], "stepped": false },
+        "green": {"keys": [[0, 3 ], [0.75, 1 ] ], "stepped": false },
+        "blue": {"keys": [[0, 3 ], [0.75, 1 ] ], "stepped": false },
+        "alpha": {"keys": [[1, 1 ], [1, 0 ] ], "stepped": false },
+        "cameraPush": 1,
+        "baseTexture": "/pa/effects/textures/particles/simpleSmoke.papa",
+        "rampTexture": "/pa/effects/textures/particles/uncompressed/simpleSmokeCenter_ramp.papa",
+        "dataChannelFormat": "PositionAndColor"
+      },
+      "type": "SHELL",
+      "offsetZ": 0,
+      "offsetRangeX": 0.5,
+      "offsetRangeY": 0.5,
+      "offsetRangeZ": 0.5,
+      "offsetAllowNegZ": false,
+      "velocityZ": 0.25,
+      "velocityRangeX": 0.1,
+      "velocityRangeY": 0.1,
+      "useRadialVelocityDir": true,
+      "velocity": 1.25,
+      "sizeX": 2.5,
+      "sizeRangeX": 0.5,
+      "rampV": 0.5,
+      "rampRangeV": 0.5,
+      "gravity": -0.1,
+      "drag": 0.98,
+      "emissionBursts": 3,
+      "rotationRange": 0.1,
+      "rotationRateRange": 0.25,
+      "lifetime": 1.2,
+      "lifetimeRange": 0.25,
+      "emitterLifetime": 2,
+      "bLoop": false
+    }
+]""")
+
+
+base['emitters'].append(linked_explosion_trail)
+base['emitters'].append(debris)
+base['emitters'].append(point_light)
+base['emitters'].extend(rings)
+base['emitters'].extend(stuff)
+
+
+
+loader.dump_effect(base, "dox_pop.pfx")

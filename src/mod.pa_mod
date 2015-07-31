@@ -1,6 +1,6 @@
 {
     "options" : {
-        "debug_mode" : true,
+        "debug_mode" : false,
         "output_dir" : "..",
         "pretty_print_effects" : true,
         "indent" : 2
@@ -8,12 +8,12 @@
     "modinfo" : {
         "context" : "client",
         "identifier" : "com.pa.domdom.pop_dox",
-        "display_name" : "Green Fab Spray",
-        "description" : "Makes fabricator spray neon green instead of team colored.",
+        "display_name" : "Pop Dox",
+        "description" : "Make dox go pop!",
         "author" : "dom314",
-        "forum" : "https://forums.uberent.com/threads/rel-client-green-fab-spray.69339/",
-        "icon" : "http://i.imgur.com/2i6W64Z.gif",
-        "version" : "0.1.1",
+        "forum" : "",
+        "icon" : "http://i.imgur.com/5LjTh2t.gif",
+        "version" : "1.0.0",
         "priority": 94
     },
     "mod" : [
@@ -23,25 +23,18 @@
                 { "op" : "add", "path" : "/events/died/effect_spec", "value" : "/mod/dox/dox_pop.pfx" }
             ]
         },
+        { "from_script" : "dox_death.py" },
         {
-            "target" : "/pa/effects/specs/fab_combat_spray.pfx",
-            "patch" : [
-                { "op" : "remove", "path" : "/emitters/0/useArmyColor" },
-                { "op" : "remove", "path" : "/emitters/1/useArmyColor" },
-                { "op" : "remove", "path" : "/emitters/2/useArmyColor" },
-
-                { "op" : "replace", "path" : "/emitters/0/spec/red", "value" : 0.4 },
-                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 4 },
-                { "op" : "replace", "path" : "/emitters/0/spec/blue", "value" : 0.05 },
-
-                { "op" : "copy", "path" : "/emitters/1/spec/red", "from" : "/emitters/0/spec/red" },
-                { "op" : "copy", "path" : "/emitters/1/spec/green", "from" : "/emitters/0/spec/green" },
-                { "op" : "copy", "path" : "/emitters/1/spec/blue", "from" : "/emitters/0/spec/blue" },
-
-                { "op" : "copy", "path" : "/emitters/2/spec/red", "from" : "/emitters/0/spec/red" },
-                { "op" : "copy", "path" : "/emitters/2/spec/green", "from" : "/emitters/0/spec/green" },
-                { "op" : "copy", "path" : "/emitters/2/spec/blue", "from" : "/emitters/0/spec/blue" }
-            ]
+            "target" : "/dox_pop.pfx",
+            "destination" : "/mod/dox/dox_pop.pfx"
+        },
+        {
+            "target" : "/models/dox_top.papa",
+            "destination" : "/mod/dox/dox_top.papa"
+        },
+        {
+            "target" : "/models/dox_bot.papa",
+            "destination" : "/mod/dox/dox_bot.papa"
         }
     ]
 }

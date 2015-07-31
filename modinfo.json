@@ -1,0 +1,13 @@
+{
+    "context": "client",
+    "identifier": "com.pa.domdom.pop_dox",
+    "display_name": "Pop Dox",
+    "description": "Make dox go pop!",
+    "author": "dom314",
+    "forum": "",
+    "icon": "http://i.imgur.com/5LjTh2t.gif",
+    "version": "1.0.0",
+    "priority": 94,
+    "build": "85051-pte",
+    "date": "2015/07/31"
+}
