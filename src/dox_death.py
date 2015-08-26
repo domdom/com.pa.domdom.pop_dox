@@ -11,6 +11,7 @@ base = loader.loads("""{
 				"red" : 1,
 				"size" : [[0.9, 1], [1, 0]],
 				"papa": "/mod/dox/dox_top.papa",
+        "rotationRateMult" : [[0, 1], [1, 0.2]],
 				"polyAdjustCenter" : 5,
 				"materialProperties": {
 					"DiffuseTexture": "/pa/units/land/assault_bot/assault_bot_diffuse.papa",

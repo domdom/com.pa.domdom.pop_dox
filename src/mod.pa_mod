@@ -13,14 +13,14 @@
         "author" : "dom314",
         "forum" : "https://forums.uberent.com/threads/rel-client-pop-dox.69367/",
         "icon" : "http://i.imgur.com/5LjTh2t.gif",
-        "version" : "1.0.1",
+        "version" : "1.0.2",
         "priority": 94
     },
     "mod" : [
         {
             "target" : "/pa/units/land/assault_bot/assault_bot.json",
             "patch" : [
-                { "op" : "add", "path" : "/events/died/effect_spec", "value" : "/mod/dox/dox_pop.pfx" }
+                { "op" : "add", "path" : "/events/died", "value" : {"effect_spec" : "/mod/dox/dox_pop.pfx" }}
             ]
         },
         { "from_script" : "dox_death.py" },
