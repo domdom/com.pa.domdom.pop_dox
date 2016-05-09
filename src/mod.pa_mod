@@ -15,7 +15,7 @@
         "icon" : "http://i.imgur.com/5LjTh2t.gif?1",
         "product" : ["Titans", "Classic"],
         "category": ["in-game", "effects"],
-        "version" : "1.0.3",
+        "version" : "1.0.4",
         "priority": 95
     },
     "mod" : [
