@@ -6,16 +6,13 @@
     "author": "dom314",
     "forum": "https://forums.uberent.com/threads/rel-client-pop-dox.69367/",
     "icon": "http://i.imgur.com/5LjTh2t.gif?1",
-    "product": [
-        "Titans",
-        "Classic"
-    ],
     "category": [
-        "in-game",
+        "gameplay",
         "effects"
     ],
-    "version": "1.0.4",
+    "version": "1.0.5",
     "priority": 95,
-    "build": "89755",
-    "date": "2016/01/09"
+    "build": "94684",
+    "date": "2016-09-11",
+    "signature": " "
 }

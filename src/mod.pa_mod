@@ -13,9 +13,8 @@
         "author" : "dom314",
         "forum" : "https://forums.uberent.com/threads/rel-client-pop-dox.69367/",
         "icon" : "http://i.imgur.com/5LjTh2t.gif?1",
-        "product" : ["Titans", "Classic"],
-        "category": ["in-game", "effects"],
-        "version" : "1.0.4",
+        "category": ["gameplay", "effects"],
+        "version" : "1.0.5",
         "priority": 95
     },
     "mod" : [
